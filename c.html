@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - White Hat Hacker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        
+        /* أنماط زر الرئيسية الجديدة */
+        .cyber-home-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(45deg, #0f0, #003300);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border: 2px solid #0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .cyber-home-btn::before {
+            content: "⌂";
+            font-size: 1.5em;
+            filter: drop-shadow(0 0 8px #0f0);
+            transition: 0.3s;
+        }
+
+        .cyber-home-btn:hover {
+            transform: rotate(5deg) scale(1.1);
+            background: #000;
+            color: #0f0;
+            box-shadow: 0 0 50px #0f0;
+            letter-spacing: 2px;
+        }
+
+        .cyber-home-btn:active {
+            transform: scale(0.9);
+            filter: brightness(1.8);
+        }
+
+        @media (max-width: 768px) {
+            .cyber-home-btn {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+        }
+
+        /* أنماط التصميم السيبراني */
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            border: 3px solid #0f0;
+            border-radius: 15px;
+            box-shadow: 0 0 50px #0f0;
+        }
+
+        .cyber-input {
+            width: 100%;
+            padding: 15px;
+            margin: 15px 0;
+            background: #000;
+            border: 2px solid #0f0;
+            color: #0f0;
+            border-radius: 8px;
+        }
+
+        .cyber-btn {
+            background: #0f0;
+            color: #000;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .cyber-btn:hover {
+            box-shadow: 0 0 30px #0f0;
+        }
+
+        .alert {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: none;
+        }
+
+        .success { background: #0f03; border: 2px solid #0f0; }
+        .error { background: #f003; border: 2px solid #f00; }
+    </style>
+</head>
+<body>
+    <div class="contact-container">
+        <h1 style="text-align: center;">📡 اتصل بنا</h1>
+        
+        <form id="contactForm">
+            <input type="text" name="user_name" class="cyber-input" placeholder="الاسم الكامل" required>
+            
+            <input type="email" name="user_email" class="cyber-input" placeholder="البريد الإلكتروني" required>
+            
+            <textarea name="message" class="cyber-input" rows="5" placeholder="الرسالة" required></textarea>
+
+            
+
+            <button type="submit" class="cyber-btn">
+                <i class="fas fa-paper-plane"></i> إرسال الرسالة
+            </button>
+
+            <div id="successAlert" class="alert success"></div>
+            <div id="errorAlert" class="alert error"></div>
+        </form>
+    </div>
+    <a href="index.html" class="cyber-home-btn">
+        <span>الرئيسية</span>
+    </a>
+    <!-- reCAPTCHA -->
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+
+    <script>
+        // تهيئة EmailJS
+        emailjs.init('yRl4TsiTz86LMuoHM');
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // التحقق من reCAPTCHA
+            
+
+            const btn = e.target.querySelector('button');
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            btn.disabled = true;
+
+            try {
+                const response = await emailjs.sendForm(
+                    'service_pkqeg98',
+                    'template_esowl0i',
+                    e.target
+                );
+
+                document.getElementById('successAlert').style.display = 'block';
+                document.getElementById('successAlert').innerHTML = 
+                    '<i class="fas fa-check"></i> تم إرسال الرسالة بنجاح!';
+                e.target.reset();
+                grecaptcha.reset();
+
+            } catch (error) {
+                document.getElementById('successAlert').style.display = 'block';
+                document.getElementById('errorAlert').innerHTML = 
+                    '<i class="fas fa-times"></i> فشل في الإرسال! حاول مرة أخرى.';
+                console.error('Error:', error);
+                
+            } finally {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+                btn.disabled = false;
+                setTimeout(() => {
+                    document.getElementById('successAlert').style.display = 'none';
+                    document.getElementById('errorAlert').style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
