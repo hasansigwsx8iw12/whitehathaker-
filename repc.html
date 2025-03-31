@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الإبلاغ الأخلاقي عن الثغرات | Whit hat haker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --cyber-blue: #00f7ff;
+            --dark-bg: #0a0a1a;
+            --neon-border: 2px solid #00f7ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Courier New', monospace;
+        }
+
+        body {
+            
+            line-height: 1.8;
+            
+            background-color: #1a1a1a;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+
+        /* تأثيرات الخلفية الديناميكية */
+        .hologram-bg {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            background: 
+                radial-gradient(circle at 50% 50%, 
+                rgba(0, 247, 255, 0.1) 0%, 
+                transparent 60%);
+            animation: hologramPulse 8s infinite;
+            z-index: -1;
+        }
+
+        @keyframes hologramPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 0.1; }
+        }
+
+        /* الهيدر الرئيسي */
+        .hero-section {
+            text-align: center;
+            padding: 100px 20px;
+            border-bottom: var(--neon-border);
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5em;
+            text-shadow: 0 0 30px var(--cyber-blue);
+            margin-bottom: 30px;
+        }
+
+        /* خطوات الإبلاغ */
+        .report-steps {
+            max-width: 1200px;
+            margin: 50px auto;
+            padding: 30px;
+        }
+
+        .step-card {
+            background: rgba(0, 15, 30, 0.9);
+            border: var(--neon-border);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 40px 0;
+            position: relative;
+            transition: 0.4s;
+        }
+
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 40px rgba(0, 247, 255, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -25px;
+            left: 30px;
+            background: var(--dark-bg);
+            padding: 10px 25px;
+            border: var(--neon-border);
+            border-radius: 30px;
+            font-size: 1.3em;
+        }
+
+        /* قسم الحماية القانونية */
+        .legal-shield {
+            background: rgba(0, 30, 60, 0.95);
+            padding: 50px 20px;
+            margin: 80px 0;
+            border-top: var(--neon-border);
+            border-bottom: var(--neon-border);
+        }
+
+        /* نموذج الاتصال الآمن */
+        .encrypted-form {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            border: var(--neon-border);
+            border-radius: 20px;
+        }
+
+        .pgp-key {
+            background: rgba(0, 20, 40, 0.9);
+            padding: 20px;
+            margin: 20px 0;
+            border-left: 5px solid var(--cyber-blue);
+        }
+                    .home-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: #00f7ff;
+            color: var(--neon-green);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: 2px solid var(--neon-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="hologram-bg"></div>
+
+    <!-- الهيدر -->
+    <header class="hero-section">
+        <h1 class="hero-title">
+            <i class="fas fa-shield-alt"></i>
+            الإبلاغ المسؤول عن الثغرات الأمنية
+        </h1>
+        <p>حماية الأنظمة الرقمية مع الحفاظ على الخصوصية</p>
+    </header>
+
+    <!-- الخطوات الإرشادية -->
+    <section class="report-steps">
+        <!-- الخطوة 1 -->
+        <div class="step-card">
+            <div class="step-number">01</div>
+            <h3><i class="fas fa-search"></i> الاكتشاف الأخلاقي</h3>
+            <ul>
+                <li>التزم بحدود الاختبار المصرح بها</li>
+                <li>لا تنسخ بيانات حساسة</li>
+                <li>استخدم أدوات مسح غير تدخلية</li>
+            </ul>
+        </div>
+
+        <!-- الخطوة 2 -->
+        <div class="step-card">
+            <div class="step-number">02</div>
+            <h3><i class="fas fa-lock"></i> التوثيق الآمن</h3>
+            <ul>
+                <li>استخدم التشفير (PGP/GPG)</li>
+                <li>أرفق أدلة غير قابلة لإعادة الاستخدام</li>
+                <li>تجنب تخزين المعلومات محليًا</li>
+            </ul>
+        </div>
+
+        <!-- الخطوة 3 -->
+        <div class="step-card">
+            <div class="step-number">03</div>
+            <h3><i class="fas fa-envelope"></i> الإبلاغ عبر القنوات الرسمية</h3>
+            <div class="pgp-key">
+                <h4>مثال قناة آمنة:</h4>
+                <p>security@company.com</p>
+                <code>-----BEGIN PGP PUBLIC KEY BLOCK-----<br>...<br>-----END PGP PUBLIC KEY BLOCK-----</code>
+            </div>
+        </div>
+    </section>
+
+    <!-- الحماية القانونية -->
+    <section class="legal-shield">
+        <div class="report-steps">
+            <h2><i class="fas fa-balance-scale"></i> الإطار القانوني الآمن</h2>
+            <div class="step-card">
+                <h3>مبادئ الإفصاح المسؤول</h3>
+                <ol>
+                    <li>التزم باتفاقية عدم إفصاح (NDA) إذا طُلِب</li>
+                    <li>انتظر 90 يومًا قبل النشر العلني</li>
+                    <li>استخدم منصات وسيطة معتمدة مثل HackerOne</li>
+                </ol>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج الاتصال -->
+    <section class="report-steps">
+        <div class="encrypted-form">
+            <h2><i class="fas fa-user-secret"></i> قنوات الإبلاغ الآمنة</h2>
+            <div class="step-card">
+                <h3>الخيارات الموصى بها:</h3>
+                <table>
+                    <tr>
+                        <td><i class="fab fa-keybase"></i> Keybase</td>
+                        <td>@company_security</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-fingerprint"></i> Signal</td>
+                        <td>+123456789</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-server"></i> منصة Bug Bounty</td>
+                        <td>hackerone.com/company</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // تأثيرات تفاعلية للبطاقات
+        document.querySelectorAll('.step-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'rotateZ(1deg) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateZ(0deg) scale(1)';
+            });
+        });
+
+        // إضافة تأثيرات للجدول
+        document.querySelectorAll('td').forEach(cell => {
+            cell.addEventListener('click', () => {
+                navigator.clipboard.writeText(cell.textContent);
+                cell.style.background = 'rgba(0,247,255,0.1)';
+                setTimeout(() => cell.style.background = '', 1000);
+            });
+        });
+    </script>
+        <a href="index.html" class="home-btn">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+    </a>
+</body>
+</html>
