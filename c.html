@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اتصل بنا - White Hat Hacker</title>
+<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --neon-green: #00FF00;
+            --dark-bg: #000;
+            --secondary: #003300;
+            --text-light: #FFF;
+        }
+
+        /* التنسيقات العامة */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Courier New', monospace;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* التصميم المتجاوب */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* الهيدر */
+        .header {
+            text-align: center;
+            padding: 2rem 0;
+            border-bottom: 2px solid var(--neon-green);
+            margin-bottom: 2rem;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* نموذج الاتصال */
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--secondary);
+            color: var(--text-light);
+            font-size: 1rem;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .form-input:focus {
+            border-color: var(--neon-green);
+            box-shadow: 0 0 15px var(--neon-green);
+            outline: none;
+        }
+
+        .form-label {
+            position: absolute;
+            right: 1rem;
+            top: -0.8rem;
+            background: var(--dark-bg);
+            padding: 0 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        /* شبكة التواصل الاجتماعي */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 3rem;
+        }
+
+        .social-card {
+            text-align: center;
+            padding: 1.5rem;
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px var(--neon-green);
+        }
+
+        .social-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        /* زر الإرسال */
+        .submit-btn {
+            background: var(--secondary);
+            color: var(--neon-green);
+            padding: 1rem 2rem;
+            border: 2px solid var(--neon-green);
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background: var(--neon-green);
+            color: var(--dark-bg);
+            box-shadow: 0 0 25px var(--neon-green);
+        }
+
+        /* زر العودة للرئيسية */
+        .home-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: var(--neon-green);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: 2px solid var(--neon-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        /* التنبيهات */
+        .alert {
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            display: none;
+        }
+
+        .alert-success {
+            background: rgba(0, 255, 0, 0.1);
+            border: 2px solid var(--neon-green);
+        }
+
+        .alert-error {
+            background: rgba(255, 0, 0, 0.1);
+            border: 2px solid #FF0000;
+        }
+
+        /* التعديلات للجوال */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8rem;
+            }
+
+            .form-input {
+                padding: 0.8rem;
+            }
+
+            .social-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .home-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 15px;
+            }
+
+            .social-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+    /* ... الأكواد السابقة ... */
+
+    .social-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+        gap: 1rem;
+        margin-top: 3rem;
+    }
+
+    .social-card {
+        text-align: center;
+        padding: 1.5rem;
+        border: 2px solid var(--neon-green);
+        border-radius: 10px;
+        transition: all 0.3s;
+        color: var(--neon-green) !important;
+        text-decoration: none !important;
+    }
+
+    .social-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 0 25px var(--neon-green);
+        color: var(--text-light) !important;
+    }
+
+    .social-icon {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    /* ... الأكواد التالية ... */
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>📡 اتصل بنا</h1>
+        </header>
+
+        <form id="contactForm" class="contact-form">
+            <div class="form-group">
+                <label class="form-label">الاسم الكامل</label>
+                <input type="text" name="user_name" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">البريد الإلكتروني</label>
+                <input type="email" name="user_email" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">الرسالة</label>
+                <textarea name="message" class="form-input" rows="6" required></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                <i class="fas fa-paper-plane"></i> إرسال الرسالة
+            </button>
+
+            <div id="successAlert" class="alert alert-success"></div>
+            <div id="errorAlert" class="alert alert-error"></div>
+        </form>
+
+        <div class="social-grid">
+            <a href="https://www.facebook.com/share/14ZvkAZyQL/" class="social-card">
+<i class="fa fa-facebook-square" aria-hidden="true"></i>
+                <span>Facebook</span>
+            </a>
+            <a href="https://www.instagram.com/cybersecrtysyria?igsh=cnNodGF4aDJva2Nw" class="social-card">
+                <i class="fa fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+
+        </div>
+    </div>
+
+    <a href="index.html" class="home-btn">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+    </a>
+
+    <script>
+        // تهيئة EmailJS
+        emailjs.init('yRl4TsiTz86LMuoHM');
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = e.target.querySelector('button');
+            const successAlert = document.getElementById('successAlert');
+            const errorAlert = document.getElementById('errorAlert');
+
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري الإرسال...';
+            btn.disabled = true;
+
+            try {
+                await emailjs.sendForm('service_pkqeg98', 'template_esowl0i', e.target);
+                successAlert.style.display = 'block';
+                successAlert.innerHTML = '<i class="fas fa-check"></i> تم إرسال الرسالة بنجاح!';
+                e.target.reset();
+            } catch (error) {
+                errorAlert.style.display = 'block';
+                errorAlert.innerHTML = '<i class="fas fa-times"></i> فشل في الإرسال! حاول مرة أخرى.';
+                console.error('Error:', error);
+            } finally {
+                btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال الرسالة';
+                btn.disabled = false;
+                setTimeout(() => {
+                    successAlert.style.display = 'none';
+                    errorAlert.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>
