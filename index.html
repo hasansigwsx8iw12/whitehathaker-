@@ -3,643 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href=
-"whiteicon.png"
-        type="image/x-icon" />
-        <meta name="google-site-verification" content="zzLT04FF-pBpn7qnB7UgUV5PO3jvCn_03RpGXY2x-yc" />
-    <title>White Hat Hacker</title>
+     <meta name="google-site-verification" content="zzLT04FF-pBpn7qnB7UgUV5PO3jvCn_03RpGXY2x-yc" />
+    <title>الموقع تحت الصيانة</title>
     <style>
-        /* أنماط شاشة التحميل */
-        .preloader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            transition: opacity 0.5s;
-        }
-
-        .cyber-loader {
-            width: 150px;
-            height: 150px;
-            position: relative;
-            margin-bottom: 30px;
-        }
-
-        .hexagon {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background: #001100;
-            animation: pulse 2s infinite;
-        }
-
-        .hexagon::before {
-            content: '';
-            position: absolute;
-            top: 3px;
-            left: 3px;
-            right: 3px;
-            bottom: 3px;
-            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-            background: linear-gradient(45deg, #00ff00 20%, #003300 80%);
-            animation: rotate 4s linear infinite;
-        }
-
-        .loading-text {
-            color: #00ff00;
-            font-size: 1.5em;
-            text-align: center;
+        body {
+            background-color: #000000;
+            color: #00FF00;
             font-family: 'Courier New', monospace;
-            text-shadow: 0 0 15px #00ff00;
-            margin: 20px 0;
-        }
-
-        .progress-container {
-            width: 250px;
-            height: 6px;
-            background: #002200;
-            border-radius: 3px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .progress-bar {
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(90deg, #003300, #00ff00, #003300);
-            transition: width 0.4s ease;
-            box-shadow: 0 0 15px #00ff00;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .progress-bar::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, 
-                transparent, 
-                rgba(0, 255, 0, 0.4), 
-                transparent);
-            animation: loadingShine 1.5s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(0.95); opacity: 0.8; }
-            50% { transform: scale(1.05); opacity: 1; }
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        @keyframes loadingShine {
-            100% { left: 200%; }
-        }
-
-        /* أنماط الموقع الأساسية */
-        * {
+            text-align: center;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-            font-family: 'Arial', sans-serif;
-        }
-
-        body {
-            background-color: #1a1a1a;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        .header {
-            background-color: #0d0d0d;
-            padding: 30px 20px;
-            text-align: center;
-            border-bottom: 2px solid #00ff00;
-        }
-
-        .logo {
-            font-size: 2.8em;
-            color: #00ff00;
-            text-shadow: 0 0 15px #00ff00;
-            letter-spacing: 3px;
-        }
-
-        .nav-bar {
-            background-color: #1a1a1a;
-            padding: 15px;
+            height: 100vh;
             display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-
-        .nav-bar a {
-            color: #00ff00;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            transition: all 0.3s;
-            border: 1px solid #003300;
-        }
-
-        .nav-bar a:hover {
-            background: #00ff00;
-            color: #001100;
-            box-shadow: 0 0 15px #00ff00;
-        }
-
-        .hero-section {
-            text-align: center;
-            padding: 100px 20px;
-            background: linear-gradient(45deg, #001a00, #000);
-        }
-
-        .hero-section h1 {
-            font-size: 2.8em;
-            margin-bottom: 25px;
-            color: #00ff00;
-        }
-
-        .hero-section p {
-            font-size: 1.3em;
-            color: #aaffaa;
-            max-width: 800px;
-            margin: 0 auto 40px;
-        }
-
-        .cta-button {
-            background: #00ff00;
-            color: #001100;
-            padding: 15px 40px;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: all 0.3s;
-            box-shadow: 0 0 20px rgba(0, 255, 0, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 30px #00ff00;
-        }
-
-        .services {
-            max-width: 1200px;
-            margin: 60px auto;
-            padding: 0 20px;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        .service-card {
-            background: #0d0d0d;
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #003300;
-            transition: all 0.3s;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 30px rgba(0, 255, 0, 0.1);
-            border-color: #00ff00;
-        }
-
-        .service-card h3 {
-            color: #00ff00;
-            margin-bottom: 15px;
-            font-size: 1.6em;
-        }
-
-        .service-card p {
-            color: #ccc;
-            line-height: 1.8;
-        }
-
-        footer {
-            background: #0d0d0d;
-            text-align: center;
-            padding: 30px 20px;
-            margin-top: 80px;
-            border-top: 2px solid #00ff00;
-        }
-
-        footer p {
-            color: #00ff00;
-            font-size: 1.1em;
-        }
-
-        /* واجهة التيرمينال */
-        .terminal-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 90%;
-            max-width: 800px;
-            height: 70vh;
-            max-height: 600px;
-            background: #001100;
-            border: 2px solid #00ff00;
-            border-radius: 10px;
-            z-index: 1000;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.5);
-            overflow: hidden;
             flex-direction: column;
-        }
-
-        .terminal-header {
-            background: #002200;
-            padding: 12px 20px;
-            display: flex;
+            justify-content: center;
             align-items: center;
-            border-bottom: 1px solid #00ff00;
+            overflow: hidden;
         }
-
-        .terminal-btn {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            margin-left: 10px;
-            cursor: pointer;
+        
+        .maintenance-container {
+            border: 2px solid #00FF00;
+            padding: 30px;
+            border-radius: 5px;
+            background-color: rgba(0, 0, 0, 0.7);
+            box-shadow: 0 0 20px #00FF00;
+            max-width: 80%;
+            animation: pulse 2s infinite;
         }
-
-        .terminal-btn.red { background: #ff5f56; }
-        .terminal-btn.yellow { background: #ffbd2e; }
-        .terminal-btn.green { background: #27c93f; }
-
-        .terminal-title {
-            flex: 1;
-            text-align: center;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 1.1em;
+        
+        h1 {
+            color: #00FF00;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 10px #00FF00;
         }
-
-        .terminal-body {
-            padding: 20px;
-            flex: 1;
-            overflow-y: auto;
-            font-family: 'Courier New', monospace;
-            color: #00ff00;
+        
+        p {
+            font-size: 1.2em;
             line-height: 1.6;
-            background-color: rgba(0, 20, 0, 0.5);
+            margin-bottom: 30px;
         }
-
-        .terminal-input {
-            display: flex;
-            padding: 15px 20px;
-            background: #001a00;
-            border-top: 1px solid #003300;
-            align-items: center;
-        }
-
-        .terminal-prompt {
-            color: #00ff00;
-            margin-left: 10px;
-            font-family: 'Courier New', monospace;
+        
+        .logo {
+            margin-bottom: 30px;
+            font-size: 2em;
             font-weight: bold;
         }
-
-        .terminal-cmd {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #00ff00;
-            font-family: 'Courier New', monospace;
-            font-size: 1em;
-            outline: none;
-            padding: 5px 10px;
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #222;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
         }
-
-        .command-line {
-            margin-bottom: 15px;
-            display: flex;
-            align-items: flex-start;
+        
+        .progress {
+            height: 100%;
+            width: 65%;
+            background-color: #00FF00;
+            animation: progress-animation 3s infinite;
         }
-
-        .command-output {
-            color: #aaffaa;
-            margin-bottom: 15px;
-            padding-right: 20px;
-            line-height: 1.7;
+        
+        .binary-code {
+            position: absolute;
+            color: rgba(0, 255, 0, 0.2);
+            font-size: 0.8em;
+            user-select: none;
+            z-index: -1;
         }
-
-        .command-output.success {
-            color: #00ff00;
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 20px #00FF00; }
+            50% { box-shadow: 0 0 30px #00FF00; }
+            100% { box-shadow: 0 0 20px #00FF00; }
         }
-
-        .command-output.error {
-            color: #ff5555;
-        }
-
-        .command-output.warning {
-            color: #ffff55;
-        }
-
-        /* التكيف مع الجوال */
-        @media (max-width: 768px) {
-            .logo {
-                font-size: 2em;
-            }
-            
-            .hero-section h1 {
-                font-size: 2em;
-            }
-            
-            .nav-bar {
-                gap: 10px;
-            }
-            
-            .service-card {
-                padding: 20px;
-            }
-
-            .terminal-modal {
-                width: 95%;
-                height: 80vh;
-            }
-
-            .terminal-body {
-                padding: 15px;
-                font-size: 0.9em;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .logo {
-                font-size: 1.8em;
-            }
-            
-            .hero-section {
-                padding: 60px 20px;
-            }
-            
-            .cta-button {
-                width: 100%;
-                max-width: 300px;
-            }
-
-            .terminal-header {
-                padding: 10px 15px;
-            }
-
-            .terminal-btn {
-                width: 12px;
-                height: 12px;
-            }
+        
+        @keyframes progress-animation {
+            0% { width: 30%; }
+            50% { width: 80%; }
+            100% { width: 30%; }
         }
     </style>
 </head>
 <body>
-    <!-- شاشة التحميل -->
-    <div class="preloader">
-        <div class="cyber-loader">
-            <div class="hexagon"></div>
+    <!-- Binary code background elements -->
+    <div class="binary-code" style="top: 10%; left: 5%;">10101010</div>
+    <div class="binary-code" style="top: 20%; right: 15%;">11100011</div>
+    <div class="binary-code" style="bottom: 30%; left: 20%;">01010101</div>
+    <div class="binary-code" style="bottom: 15%; right: 10%;">10011001</div>
+    
+    <div class="logo">WHITE HAT HACKER</div>
+    
+    <div class="maintenance-container">
+        <h1>الموقع تحت الصيانة</h1>
+        <p>نقوم حاليًا بإجراء بعض التحديثات والتطويرات على الموقع لتحسين تجربتكم.</p>
+        <p>سنعود قريبًا بمظهر جديد ووظائف محسنة!</p>
+        
+        <div class="progress-bar">
+            <div class="progress"></div>
         </div>
-        <div class="loading-text">جاري التهيئة الآمنة...</div>
-        <div class="progress-container">
-            <div class="progress-bar"></div>
-        </div>
+        
+        <p>نعتذر للإزعاج ونشكركم على صبركم.</p>
     </div>
-
-    <!-- محتوى الموقع -->
-    <header class="header">
-        <h1 class="logo">WHITE HAT HACKER</h1>
-    </header>
-
-    <nav class="nav-bar">
-        <a href="#home">الرئيسية</a>
-        <a href="s.html">الخدمات</a>
-        <a href="n.html">نصائح</a>
-        <a href="c.html">أتصل بنا</a>
-        <a href="secrety1.html">الدليل الشامل</a>
-        <a href="free.html">خدمات مجاناً</a>
-    </nav>
-
-    <section class="hero-section">
-        <h1>الحماية السيبرانية المتقدمة</h1>
-        <p>حلول أمنية مبتكرة لحماية أنظمتك من التهديدات الإلكترونية</p>
-        <button class="cta-button" id="terminalBtn">ابدأ الآن</button>
-    </section>
-
-    <div class="services">
-        <div class="service-card">
-            <h3>اختبار الاختراق</h3>
-            <p>اكتشاف الثغرات الأمنية قبل أن يستغلها المخترقون</p>
-        </div>
-        <div class="service-card">
-            <h3>التدريب الأمني</h3>
-            <p>برامج تدريبية متخصصة لفريقك التقني</p>
-        </div>
-        <div class="service-card">
-            <h3>الاستجابة للحوادث</h3>
-            <p>التعامل الفوري مع الاختراقات الأمنية</p>
-        </div>
-    </div>
-
-    <footer>
-        <p>تابعنا على إنستجرام: @hasan122.1</p>
-    </footer>
-
-    <!-- واجهة التيرمينال -->
-    <div class="terminal-modal" id="terminalModal">
-        <div class="terminal-header">
-            <div class="terminal-btn red" id="closeTerminal"></div>
-            <div class="terminal-btn yellow"></div>
-            <div class="terminal-btn green"></div>
-            <div class="terminal-title">WhiteHat Terminal v2.1</div>
-        </div>
-        <div class="terminal-body" id="terminalBody">
-            <div class="command-output success">
-                نظام WhiteHat Terminal جاهز للاستخدام<br>
-                اكتب <span style="color:#ffffff">'help'</span> لعرض قائمة الأوامر المتاحة
-            </div>
-        </div>
-        <div class="terminal-input">
-            <span class="terminal-prompt">$</span>
-            <input type="text" class="terminal-cmd" id="terminalInput" placeholder="اكتب الأمر هنا...">
-        </div>
-    </div>
-
-    <script>
-        // محاكاة عملية التحميل
-        document.addEventListener('DOMContentLoaded', function() {
-            let progress = 0;
-            const progressBar = document.querySelector('.progress-bar');
-            const loadingText = document.querySelector('.loading-text');
-            const messages = [
-                "جاري تحميل الوحدات الأمنية...",
-                "تهيئة قاعدة البيانات...",
-                "تفعيل جدار الحماية...",
-                "جاري التهيئة النهائية..."
-            ];
-
-            const interval = setInterval(function() {
-                progress += Math.random() * 15 + 5;
-                progressBar.style.width = progress + '%';
-                
-                const msgIndex = Math.min(Math.floor(progress / 25), 3);
-                loadingText.textContent = messages[msgIndex];
-                
-                if(progress >= 100) {
-                    clearInterval(interval);
-                    setTimeout(function() {
-                        document.querySelector('.preloader').style.opacity = '0';
-                        setTimeout(function() {
-                            document.querySelector('.preloader').style.display = 'none';
-                        }, 500);
-                    }, 500);
-                }
-            }, 300);
-        });
-
-        // إدارة واجهة التيرمينال
-        const terminalBtn = document.getElementById('terminalBtn');
-        const terminalModal = document.getElementById('terminalModal');
-        const terminalBody = document.getElementById('terminalBody');
-        const terminalInput = document.getElementById('terminalInput');
-        const closeTerminal = document.getElementById('closeTerminal');
-
-        // أوامر التيرمينال
-        const commands = {
-            help: {
-                output: `
-                    <div class="command-output">
-                        <strong>الأوامر المتاحة:</strong><br><br>
-                        <span style="color:#00ff00">• scan</span> - فحص النظام بحثاً عن الثغرات<br>
-                        <span style="color:#00ff00">• protect</span> - تفعيل الحماية المتقدمة<br>
-                        <span style="color:#00ff00">• encrypt</span> - تشفير الملفات الحساسة<br>
-                        <span style="color:#00ff00">• firewall</span> - إدارة جدار الحماية<br>
-                        <span style="color:#00ff00">• clear</span> - مسح شاشة التيرمينال<br>
-                        <span style="color:#00ff00">• exit</span> - إغلاق واجهة التيرمينال
-                    </div>
-                `,
-                type: 'success'
-            },
-            scan: {
-                output: `
-                    <div class="command-output">
-                        <strong>جاري فحص النظام...</strong><br><br>
-                        ✓ فحص الثغرات الأمنية... <span style="color:#00ff00">اكتمل</span><br>
-                        ✓ تحليل نقاط الضعف... <span style="color:#00ff00">اكتمل</span><br>
-                        ✓ فحص كلمات المرور... <span style="color:#ff5555">3 ضعيفة</span><br><br>
-                        <span style="color:#ffff55">تم اكتشاف 5 ثغرات أمنية</span><br>
-                        جاري إصلاحها تلقائياً...
-                    </div>
-                `,
-                type: 'warning'
-            },
-            protect: {
-                output: `
-                    <div class="command-output success">
-                        <strong>جاري تفعيل الحماية المتقدمة...</strong><br><br>
-                        ✓ تأمين المنافذ المفتوحة<br>
-                        ✓ تحديث قواعد الحماية<br>
-                        ✓ تفعيل مراقبة النشاط<br><br>
-                        النظام الآن محمي بنسبة <span style="color:#00ff00">98%</span>
-                    </div>
-                `,
-                type: 'success'
-            },
-            encrypt: {
-                output: `
-                    <div class="command-output">
-                        <strong>نظام التشفير المتقدم</strong><br><br>
-                        ✓ جاري تشفير الملفات الحساسة<br>
-                        ✓ استخدام خوارزمية AES-256<br>
-                        ✓ إنشاء مفاتيح التشفير<br><br>
-                        <span style="color:#00ff00">تم تشفير 24 ملف بنجاح</span>
-                    </div>
-                `,
-                type: 'success'
-            },
-            firewall: {
-                output: `
-                    <div class="command-output">
-                        <strong>حالة جدار الحماية:</strong><br><br>
-                        • الحالة: <span style="color:#00ff00">نشط</span><br>
-                        • المنافذ المفتوحة: <span style="color:#ffff55">3</span><br>
-                        • الهجمات المصدودة: 128<br><br>
-
-                    </div>
-                `,
-                type: 'warning'
-            }
-        };
-
-        // فتح التيرمينال
-        terminalBtn.addEventListener('click', function() {
-            terminalModal.style.display = 'flex';
-            terminalInput.focus();
-        });
-
-        // إغلاق التيرمينال
-        closeTerminal.addEventListener('click', function() {
-            terminalModal.style.display = 'none';
-        });
-
-        // معالجة الأوامر
-        terminalInput.addEventListener('keypress', function(e) {
-            if(e.key === 'Enter') {
-                const command = this.value.trim().toLowerCase();
-                this.value = '';
-                
-                // إضافة الأمر إلى الشاشة
-                terminalBody.innerHTML += `
-                    <div class="command-line">
-                        <span class="terminal-prompt">$</span> ${command}
-                    </div>`;
-                
-                // معالجة الأوامر الخاصة
-                if(command === 'clear') {
-                    terminalBody.innerHTML = '';
-                    return;
-                }
-                
-                if(command === 'exit') {
-                    terminalModal.style.display = 'none';
-                    return;
-                }
-                
-                // تنفيذ الأوامر المعرفة
-                if(commands[command]) {
-                    terminalBody.innerHTML += commands[command].output;
-                } else {
-                    terminalBody.innerHTML += `
-                        <div class="command-output error">
-                            خطأ: الأمر '${command}' غير معروف<br>
-                            اكتب 'help' لعرض الأوامر المتاحة
-                        </div>`;
-                }
-                
-                // التمرير إلى الأسفل
-                terminalBody.scrollTop = terminalBody.scrollHeight;
-            }
-        });
-
-        // إغلاق التيرمينال عند النقر خارج النافذة
-        window.addEventListener('click', function(e) {
-            if(e.target === terminalModal) {
-                terminalModal.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
