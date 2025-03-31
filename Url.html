@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>أداة فحص الروابط - White Hat Hacker</title>
+    <style>
+        :root {
+            --primary: #00ff00;
+            --dark: #0a0a0a;
+            --light: #ffffff;
+            --danger: #ff5555;
+            --safe: #00ff00;
+            --warning: #ffff55;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', sans-serif;
+        }
+
+        body {
+            background-color: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(45deg, #001a00, #000);
+            padding: 30px 0;
+            text-align: center;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary);
+            text-shadow: 0 0 15px var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .scanner-box {
+            background: #0d0d0d;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 1px solid #003300;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.1);
+        }
+
+        .scanner-title {
+            color: var(--primary);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+        }
+
+        .input-group {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        #url-input {
+            flex: 1;
+            padding: 15px;
+            border: 1px solid #003300;
+            background: #001100;
+            color: var(--light);
+            font-size: 1.1rem;
+            border-radius: 5px 0 0 5px;
+            outline: none;
+        }
+
+        #scan-btn {
+            background: var(--primary);
+            color: #001100;
+            border: none;
+            padding: 0 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 0 5px 5px 0;
+            transition: all 0.3s;
+        }
+
+        #scan-btn:hover {
+            background: #00cc00;
+        }
+
+        .result-card {
+            background: #001100;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+            border-left: 4px solid var(--primary);
+            display: none;
+        }
+
+        .result-title {
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .result-icon {
+            margin-left: 10px;
+            font-size: 1.5rem;
+        }
+
+        .safe { color: var(--safe); }
+        .warning { color: var(--warning); }
+        .danger { color: var(--danger); }
+
+        .threat-list {
+            margin-top: 15px;
+            padding-right: 20px;
+        }
+
+        .threat-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background: rgba(255, 85, 85, 0.1);
+            border-radius: 5px;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 255, 0, 0.3);
+            border-radius: 50%;
+            border-top: 4px solid var(--primary);
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+            border-top: 1px solid #003300;
+            color: #aaffaa;
+        }
+
+        @media (max-width: 768px) {
+            .input-group {
+                flex-direction: column;
+            }
+
+            #url-input {
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            #scan-btn {
+                border-radius: 5px;
+                padding: 15px;
+            }
+        }
+        .cyber-home-btn {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            background: linear-gradient(45deg, #0f0, #003300);
+            color: #000;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1000;
+            border: 2px solid #0f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .cyber-home-btn::before {
+            content: "⌂";
+            font-size: 1.5em;
+            filter: drop-shadow(0 0 8px #0f0);
+            transition: 0.3s;
+        }
+
+        .cyber-home-btn:hover {
+            transform: rotate(5deg) scale(1.1);
+            background: #000;
+            color: #0f0;
+            box-shadow: 0 0 50px #0f0;
+            letter-spacing: 2px;
+        }
+
+        .cyber-home-btn:active {
+            transform: scale(0.9);
+            filter: brightness(1.8);
+        }
+
+        @media (max-width: 768px) {
+            .cyber-home-btn {
+                bottom: 20px;
+                left: 20px;
+                padding: 12px 20px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1 class="logo">White Hat Hacker</h1>
+            <p>أداة فحص الروابط باستخدام Google Safe Browsing</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="scanner-box">
+            <h2 class="scanner-title"><i class="fas fa-shield-alt"></i> فحص أمان الرابط</h2>
+            <div class="input-group">
+                <input type="url" id="url-input" placeholder="https://example.com" autocomplete="off">
+                <button id="scan-btn">فحص</button>
+            </div>
+
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p>جاري التحقق من الرابط...</p>
+            </div>
+
+            <div class="result-card" id="result-card">
+                <h3 class="result-title">
+                    <span id="result-status">نتيجة الفحص</span>
+                    <i class="result-icon" id="status-icon"></i>
+                </h3>
+                <div id="result-details">
+                    <!-- سيتم ملؤها بالنتائج -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="index.html" class="cyber-home-btn">
+        <span>الرئيسية</span></a>
+    <footer>
+        <div class="container">
+<p>instgram: @hasan122.1</p>
+        </div>
+    </footer>
+
+    <script>
+        // العناصر الرئيسية
+        const urlInput = document.getElementById('url-input');
+        const scanBtn = document.getElementById('scan-btn');
+        const loader = document.getElementById('loader');
+        const resultCard = document.getElementById('result-card');
+        const resultStatus = document.getElementById('result-status');
+        const statusIcon = document.getElementById('status-icon');
+        const resultDetails = document.getElementById('result-details');
+
+        // API Key - يجب استبدالها بمفتاحك الخاص
+        const API_KEY = 'AIzaSyBMevDGxG3Ha6Ya0TFdbU_KWvVDDqOam4M'; // هذا مفتاح مثال، احصل على مفتاحك من Google Cloud Console
+
+        // دالة الفحص باستخدام Google Safe Browsing
+        async function scanURL(url) {
+            try {
+                // التحقق من صحة الرابط
+                if (!isValidURL(url)) {
+                    throw new Error('رابط غير صالح');
+                }
+
+                // إظهار مؤشر التحميل
+                loader.style.display = 'block';
+                resultCard.style.display = 'none';
+
+                // إرسال طلب إلى Google Safe Browsing
+                const response = await fetch(`https://safebrowsing.googleapis.com/v4/threatMatches:find?key=${API_KEY}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        client: {
+                            clientId: "WhiteHatHacker",
+                            clientVersion: "1.0"
+                        },
+                        threatInfo: {
+                            threatTypes: ["MALWARE", "SOCIAL_ENGINEERING", "UNWANTED_SOFTWARE", "POTENTIALLY_HARMFUL_APPLICATION"],
+                            platformTypes: ["ANY_PLATFORM"],
+                            threatEntryTypes: ["URL"],
+                            threatEntries: [{ url }]
+                        }
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error('فشل في الاتصال بالخدمة');
+                }
+
+                const data = await response.json();
+
+                // معالجة النتائج
+                displayResults(data, url);
+
+            } catch (error) {
+                showError(error.message);
+            } finally {
+                loader.style.display = 'none';
+            }
+        }
+
+        // دالة التحقق من صحة الرابط
+        function isValidURL(url) {
+            try {
+                new URL(url);
+                return true;
+            } catch {
+                return false;
+            }
+        }
+
+        // دالة عرض النتائج
+        function displayResults(data, url) {
+            resultCard.style.display = 'block';
+
+            // إذا لم يكن هناك تهديدات
+            if (!data.matches || data.matches.length === 0) {
+                resultStatus.textContent = 'رابط آمن';
+                resultStatus.className = 'result-title safe';
+                statusIcon.className = 'fas fa-check-circle result-icon safe';
+                
+                resultDetails.innerHTML = `
+                    <p>✓ هذا الرابط آمن حسب Google Safe Browsing</p>
+                    <p>✓ لا توجد تهديدات مكتشفة</p>
+                    <p>✓ يمكنك زيارة الرابط بأمان</p>
+                `;
+            } else {
+                // إذا كان هناك تهديدات
+                resultStatus.textContent = 'تحذير: رابط خطير';
+                resultStatus.className = 'result-title danger';
+                statusIcon.className = 'fas fa-exclamation-triangle result-icon danger';
+                
+                let threatsHTML = '<div class="threat-list">';
+                
+                data.matches.forEach(match => {
+                    threatsHTML += `
+                        <div class="threat-item">
+                            <strong>نوع التهديد:</strong> ${translateThreatType(match.threatType)}<br>
+                            <strong>نظام التشغيل المستهدف:</strong> ${translatePlatformType(match.platformType)}
+                        </div>
+                    `;
+                });
+                
+                threatsHTML += '</div>';
+                
+                resultDetails.innerHTML = `
+                    <p>✗ تم اكتشاف التهديدات التالية في هذا الرابط:</p>
+                    ${threatsHTML}
+                    <p class="warning">⚠️ تحذير: لا تقم بزيارة هذا الرابط أو إدخال أي معلومات شخصية</p>
+                `;
+            }
+        }
+
+        // دالة ترجمة أنواع التهديدات
+        function translateThreatType(threatType) {
+            const types = {
+                "MALWARE": "برمجيات خبيثة",
+                "SOCIAL_ENGINEERING": "تصيد احتيالي",
+                "UNWANTED_SOFTWARE": "برمجيات غير مرغوب فيها",
+                "POTENTIALLY_HARMFUL_APPLICATION": "تطبيق ضار محتمل"
+            };
+            return types[threatType] || threatType;
+        }
+
+        // دالة ترجمة أنظمة التشغيل
+        function translatePlatformType(platformType) {
+            const platforms = {
+                "ANY_PLATFORM": "جميع الأنظمة",
+                "WINDOWS": "Windows",
+                "LINUX": "Linux",
+                "ANDROID": "Android",
+                "OSX": "Mac OS",
+                "IOS": "iOS",
+                "CHROME": "Chrome"
+            };
+            return platforms[platformType] || platformType;
+        }
+
+        // دالة عرض الأخطاء
+        function showError(message) {
+            resultCard.style.display = 'block';
+            resultStatus.textContent = 'حدث خطأ';
+            resultStatus.className = 'result-title warning';
+            statusIcon.className = 'fas fa-exclamation-circle result-icon warning';
+            resultDetails.innerHTML = `
+                <p>❌ ${message}</p>
+                <p>الرجاء المحاولة مرة أخرى لاحقًا</p>
+            `;
+        }
+
+        // أحداث
+        scanBtn.addEventListener('click', () => {
+            const url = urlInput.value.trim();
+            if (url) {
+                scanURL(url);
+            } else {
+                showError('الرجاء إدخال رابط صحيح');
+            }
+        });
+
+        urlInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                scanBtn.click();
+            }
+        });
+    </script>
+</body>
+</html>

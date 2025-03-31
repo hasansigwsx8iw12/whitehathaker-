@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الخدمات المتقدمة</title>
+    <style>
+        /* أنماط أساسية */
+        body {
+            background: #000;
+            color: #0f0;
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+
+        /* تأثير المطر الرقمي الخلفي */
+        .matrix-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 0.1;
+        }
+
+        /* العنوان الرئيسي مع تأثير النيون */
+        .main-title {
+            text-align: center;
+            font-size: 4em;
+            text-shadow: 0 0 15px #0f0;
+            position: relative;
+            animation: neonPulse 2s infinite;
+        }
+
+        @keyframes neonPulse {
+            0%, 100% { opacity: 0.8; }
+            50% { opacity: 1; }
+        }
+
+        /* شبكة الخدمات */
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            padding: 5% 10%;
+        }
+
+        /* بطاقة الخدمة */
+        .service-card {
+            background: rgba(0, 20, 0, 0.9);
+            border: 2px solid #0f0;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            overflow: hidden;
+            transition: 0.5s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) rotateX(15deg);
+            box-shadow: 0 0 40px #0f0;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, #0f0, transparent);
+            animation: laserScan 6s linear infinite;
+        }
+
+        @keyframes laserScan {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* أيقونات الخدمات */
+        .service-icon {
+            font-size: 3.5em;
+            filter: drop-shadow(0 0 10px #0f0);
+            margin-bottom: 20px;
+        }
+
+        /* تفاصيل الخدمة */
+        .service-details {
+            position: relative;
+            z-index: 1;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        .price-tag {
+            background: #0f0;
+            color: #000;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 15px 0;
+        }
+
+        /* قائمة الميزات */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            border-left: 3px solid #0f0;
+        }
+
+        .feature-list li {
+            padding: 10px;
+            margin: 10px 0;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: '>>';
+            color: #0f0;
+            margin-left: 10px;
+        }
+
+        /* زر الشراء */
+        .buy-button {
+            background: linear-gradient(45deg, #0f0, #060);
+            border: none;
+            padding: 12px 30px;
+            color: #000;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .buy-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #0f0;
+        }
+        .cyber-back-btn {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        background: #0f0;
+        color: #000;
+        padding: 15px 30px;
+        border-radius: 25px;
+        text-decoration: none;
+        font-weight: bold;
+        box-shadow: 0 0 20px #0f0;
+        transition: 0.3s;
+        z-index: 1000;
+        border: 2px solid #000;
+    }
+
+    .cyber-back-btn:hover {
+        transform: scale(1.1);
+        background: #000;
+        color: #0f0;
+        box-shadow: 0 0 40px #0f0;
+    }
+
+    .cyber-back-btn::before {
+        content: "⌂";
+        margin-left: 10px;
+        font-size: 1.2em;
+    }
+    </style>
+</head>
+<body>
+    <canvas class="matrix-bg" id="matrix"></canvas>
+
+    <h1 class="main-title">〄 الخدمات المجانية 〄</h1>
+
+    <div class="service-grid">
+
+                <div class="service-card">
+            <div class="service-details">
+                <div class="service-icon">🌐</div>
+                <h2>اداة فحص روابط</h2>
+                <div class="price-tag">Free</div>
+                <ul class="feature-list">
+                    <li>فحص الروابط وتنبيه من الخطر</li>
+                    <li>فحص الروابط بأستخدام Google Safe Browsing</li>
+
+                </ul>
+                <a href="URL.html"><button class="buy-button">اطلب الخدمة</button></a>
+            </div>
+        </div>
+        
+    </div>
+
+    <script>
+
+
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const chars = '01';
+        const drops = [];
+        const fontSize = 14;
+        const columns = canvas.width/fontSize;
+
+        for(let i = 0; i < columns; i++) drops[i] = 1;
+
+        function drawMatrix() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            ctx.fillStyle = '#0F0';
+            ctx.font = fontSize + 'px monospace';
+
+            for(let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i*fontSize, drops[i]*fontSize);
+                
+                if(drops[i]*fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+
+        setInterval(drawMatrix, 50);
+    </script>
+    
+</body>
+<footer>
+  <a href="index.html" class="cyber-back-btn">الرئيسية</a>
+</footer>
+</html>
