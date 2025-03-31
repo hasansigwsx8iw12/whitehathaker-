@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ادواة مفتوحة المصدر - white hat haker</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <style>
+        :root {
+            --neon-green: #0f0;
+            --dark-bg: #000;
+            --cyber-gradient: linear-gradient(45deg, #0f0, #003300);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: var(--dark-bg);
+            color: var(--neon-green);
+            font-family: 'Courier New', monospace;
+            overflow-x: hidden;
+        }
+
+        /* تأثير المطر الرقمي */
+        .matrix-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.1;
+            background-image: 
+                linear-gradient(rgba(0,255,0,0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,255,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: matrixAnim 100s linear infinite;
+        }
+
+        @keyframes matrixAnim {
+            0% { background-position: 0 0; }
+            100% { background-position: 1000px 1000px; }
+        }
+
+        /* التصميم الرئيسي */
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        .title {
+            font-size: 3em;
+            text-shadow: 0 0 30px var(--neon-green);
+            position: relative;
+            display: inline-block;
+        }
+
+        .title::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 3px;
+            background: var(--cyber-gradient);
+            bottom: -10px;
+            left: 0;
+            animation: titleGlow 2s infinite;
+        }
+
+        /* فئات الأدوات */
+        .category-section {
+            margin: 4rem 0;
+            border: 3px solid var(--neon-green);
+            border-radius: 15px;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .category-section::before {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(0,255,0,0.1) 10px,
+                rgba(0,255,0,0.1) 20px
+            );
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+
+        .category-title {
+            font-size: 2em;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        /* بطاقات الأدوات */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .tool-card {
+            background: rgba(0,30,0,0.9);
+            border: 2px solid var(--neon-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px var(--neon-green);
+        }
+
+        .tool-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-icon {
+            font-size: 2em;
+            color: var(--neon-green);
+            text-shadow: 0 0 15px var(--neon-green);
+        }
+
+        .tool-name {
+            font-size: 1.3em;
+            color: var(--neon-green);
+        }
+
+        .tool-description {
+            color: #8f8;
+            margin: 1rem 0;
+            line-height: 1.6;
+        }
+
+        .tool-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .tool-link {
+            background: var(--cyber-gradient);
+            color: #000;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .tool-link:hover {
+            box-shadow: 0 0 15px var(--neon-green);
+        }
+
+        /* النسخة الجوالية */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .title {
+                font-size: 2em;
+            }
+            
+            .category-section {
+                padding: 1rem;
+            }
+        }
+                .home-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: var(--secondary);
+            color: var(--neon-green);
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            border: 2px solid var(--neon-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+    </style>
+</head>
+<body>
+    <div class="matrix-overlay"></div>
+
+    <div class="container">
+        <header class="header">
+            <h1 class="title">📂 مكتبة الأدوات المفتوحة المصدر</h1>
+        </header>
+
+        <!-- قسم الذكاء الاصطناعي -->
+        <section class="category-section">
+            <h2 class="category-title">🤖 ذكاء اصطناعي</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-robot tool-icon"></i>
+                        <h3 class="tool-name">TensorFlow</h3>
+                    </div>
+                    <p class="tool-description">
+                        مكتبة مفتوحة المصدر للتعلم الآلي طورتها جوجل
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://www.tensorflow.org/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-brain tool-icon"></i>
+                        <h3 class="tool-name">PyTorch</h3>
+                    </div>
+                    <p class="tool-description">
+                        إطار عمل للتعلم العميق مدعوم من فيسبوك
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://pytorch.org/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+                
+                                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-robot tool-icon"></i>
+                        <h3 class="tool-name">ChatGbt</h3>
+                    </div>
+                    <p class="tool-description"> 
+                    هو نموذج ذكاء اصطناعي توليدي - يمكنه توليد النصوص والرموز والصور والصوت 
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://openai.com/index/chatgpt/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الأمن السيبراني -->
+        <section class="category-section">
+            <h2 class="category-title">🔒 أمن سيبراني</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-shield-alt tool-icon"></i>
+                        <h3 class="tool-name">Metasploit</h3>
+                    </div>
+                    <p class="tool-description">
+                        إطار عمل لاختبار الاختراق وتطوير البرمجيات الأمنية
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://www.metasploit.com/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fas fa-lock tool-icon"></i>
+                        <h3 class="tool-name">Wireshark</h3>
+                    </div>
+                    <p class="tool-description">
+                        أداة تحليل بروتوكولات الشبكات مفتوحة المصدر
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://www.wireshark.org/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+                                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fa fa-eye" aria-hidden="true"></i>
+                        <h3 class="tool-name">Nmap</h3>
+                    </div>
+                    <p class="tool-description">
+                          فحص خدمات الشبكة على الأجهزة البعيدة لتحديد أسماء التطبيقات ورقم النسخة
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://nmap.org/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم تطوير الويب -->
+        <section class="category-section">
+            <h2 class="category-title">🌐 تطوير الويب</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fab fa-react tool-icon"></i>
+                        <h3 class="tool-name">React</h3>
+                    </div>
+                    <p class="tool-description">
+                        مكتبة جافاسكريبت لبناء واجهات المستخدم
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://react.dev/" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+
+                <div class="tool-card">
+                    <div class="tool-header">
+                        <i class="fab fa-node tool-icon"></i>
+                        <h3 class="tool-name">Node.js</h3>
+                    </div>
+                    <p class="tool-description">
+                        بيئة تشغيل جافاسكريبت من جانب الخادم
+                    </p>
+                    <div class="tool-links">
+                        <a href="https://nodejs.org/en" class="tool-link">الموقع الرسمي</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <a href="index.html" class="home-btn">
+        <i class="fas fa-home"></i>
+        <span>الرئيسية</span>
+    </a>
+    <script>
+        // إضافة تأثيرات تفاعلية
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const x = e.pageX - card.offsetLeft;
+                const y = e.pageY - card.offsetTop;
+                card.style.setProperty('--x', `${x}px`);
+                card.style.setProperty('--y', `${y}px`);
+            });
+        });
+
+        // تأثيرات القائمة
+        const sections = document.querySelectorAll('.category-section');
+        window.addEventListener('scroll', () => {
+            sections.forEach(section => {
+                const sectionTop = section.getBoundingClientRect().top;
+                if (sectionTop < window.innerHeight * 0.8) {
+                    section.style.opacity = '1';
+                    section.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
