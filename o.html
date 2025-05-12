@@ -202,60 +202,6 @@
             display: block !important;
         }
 
-        .upload-section {
-            margin-top: 15px;
-            padding: 15px;
-            border: 2px dashed #0f0;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .upload-label {
-            cursor: pointer;
-            color: #0f0;
-            display: block;
-            transition: 0.3s;
-        }
-
-        .upload-label:hover {
-            text-shadow: 0 0 15px #0f0;
-        }
-
-        .upload-preview {
-            margin-top: 10px;
-            max-width: 200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .upload-preview img {
-            width: 100%;
-            height: auto;
-            border: 1px solid #0f0;
-            border-radius: 5px;
-        }
-
-        .remove-image {
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            background: #f00;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 25px;
-            height: 25px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        .error-message {
-            color: #f00;
-            font-size: 0.8em;
-            margin-top: 5px;
-            display: none;
-        }
-
         @media (max-width: 768px) {
             .order-container {
                 margin: 10px;
@@ -367,14 +313,6 @@
                     
                     <div class="payment-info" id="syriatelInfo">
                         الرقم الخاص: 47583416
-                        <div class="upload-section">
-                            <label for="paymentProof" class="upload-label">
-                                📤 ارفع صورة الإثبات
-                                <input type="file" id="paymentProof" accept="image/*" hidden required>
-                                <div class="error-message">!يجب رفع صورة الإثبات</div>
-                                <div class="upload-preview"></div>
-                            </label>
-                        </div>
                     </div>
                     
                     <div class="payment-info" id="cryptoInfo">
@@ -441,56 +379,19 @@
 
         paymentBtns.forEach(btn => {
             btn.addEventListener('click', () => {
+                // إزالة التحديد السابق
                 paymentBtns.forEach(b => b.classList.remove('active'));
                 paymentInfos.forEach(info => info.classList.remove('active-payment'));
 
+                // إضافة التحديد الجديد
                 btn.classList.add('active');
                 const paymentType = btn.dataset.type;
                 selectedPayment = paymentType;
                 
+                // عرض معلومات الدفع
                 document.getElementById(`${paymentType}Info`).classList.add('active-payment');
             });
         });
-
-        // إدارة تحميل الصورة
-        let paymentProofFile = null;
-        const paymentProofInput = document.getElementById('paymentProof');
-        const uploadPreview = document.querySelector('.upload-preview');
-        const errorMessage = document.querySelector('.error-message');
-
-        paymentProofInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                if (!file.type.startsWith('image/')) {
-                    showError('الرجاء رفع ملف صورة فقط');
-                    return;
-                }
-
-                const reader = new FileReader();
-                reader.onload = (e) => {
-                    uploadPreview.innerHTML = `
-                        <img src="${e.target.result}" alt="إثبات الدفع">
-                        <button type="button" class="remove-image" onclick="removeImage()">×</button>
-                    `;
-                    errorMessage.style.display = 'none';
-                }
-                reader.readAsDataURL(file);
-                paymentProofFile = file;
-            }
-        });
-
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.style.display = 'block';
-            paymentProofInput.value = '';
-        }
-
-        function removeImage() {
-            uploadPreview.innerHTML = '';
-            paymentProofFile = null;
-            paymentProofInput.value = '';
-            errorMessage.style.display = 'none';
-        }
 
         // إرسال النموذج
         document.getElementById('orderForm').addEventListener('submit', async (e) => {
@@ -505,16 +406,6 @@
                     return;
                 }
 
-                // التحقق من صورة الإثبات لسيريتل كاش
-                if (selectedPayment === 'syriatel') {
-                    if (!paymentProofInput.files[0]) {
-                        errorMessage.style.display = 'block';
-                        paymentProofInput.closest('.upload-section').style.borderColor = '#f00';
-                        return;
-                    }
-                    paymentProofInput.closest('.upload-section').style.borderColor = '#0f0';
-                }
-
                 btn.innerHTML = 'جاري الإرسال...';
                 btn.disabled = true;
 
@@ -526,34 +417,9 @@
                     service_type: document.getElementById('serviceType').value,
                     payment_type: selectedPayment,
                     payment_details: document.querySelector(`#${selectedPayment}Info`).innerText,
-                    message: document.getElementById('details').value,
-                    payment_proof: paymentProofFile ? paymentProofFile.name : 'لا يوجد'
+                    message: document.getElementById('details').value
                 };
 
-                // إرسال البيانات مع الصورة
-                if (selectedPayment === 'syriatel' && paymentProofFile) {
-                    const reader = new FileReader();
-                    reader.readAsDataURL(paymentProofFile);
-                    reader.onload = () => {
-                        formData.attachment = {
-                            name: paymentProofFile.name,
-                            data: reader.result.split(',')[1]
-                        };
-                        sendEmail(formData, btn);
-                    };
-                } else {
-                    await sendEmail(formData, btn);
-                }
-
-            } catch (error) {
-                console.error('Error:', error);
-                btn.innerHTML = '❌ فشل الإرسال! حاول مجدداً';
-                btn.disabled = false;
-            }
-        });
-
-        async function sendEmail(formData, btn) {
-            try {
                 await emailjs.send('service_gg4lsru', 'template_jo4qxbf', formData);
                 
                 btn.innerHTML = '✔ تم الإرسال بنجاح';
@@ -564,16 +430,18 @@
                     btn.innerHTML = '▷ تأكيد الطلب ▷';
                     btn.disabled = false;
                     btn.style.background = 'linear-gradient(45deg, #0f0, #003300)';
-                    document.getElementById('orderForm').reset();
-                    removeImage();
+                    form.reset();
                     paymentInfos.forEach(info => info.classList.remove('active-payment'));
                     paymentBtns.forEach(b => b.classList.remove('active'));
                     selectedPayment = null;
                 }, 2000);
+
             } catch (error) {
-                throw error;
+                console.error('Error:', error);
+                btn.innerHTML = '❌ فشل الإرسال! حاول مجدداً';
+                btn.disabled = false;
             }
-        }
+        });
     </script>
 </body>
 </html>
